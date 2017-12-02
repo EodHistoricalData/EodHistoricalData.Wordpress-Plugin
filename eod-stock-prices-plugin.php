@@ -8,6 +8,7 @@ Author: Eod Historical Data
 Author URI: https://eodhistoricaldata.com
 */
 require ('admin/eod-stock-prices-admin.php');
+require('widget/eod-stock-prices-widget.php');
 
 if(!class_exists('EOD_Stock_Prices_Plugin'))
 {
@@ -24,8 +25,8 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             register_deactivation_hook( __FILE__, array(&$this,'deactivate'));
 
             add_action('init', array(&$this,'shortcodes_init'));
+            add_action( 'widgets_init', array(&$this,'widgets_init'));
             add_action( 'wp_enqueue_scripts',  array(&$this,'enqueue_scripts'));
-
 
             $this->register_ajax_routes();
             $this->admin = new EOD_Stock_Prices_Admin();
@@ -46,6 +47,16 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
 
         }
 
+        /**
+         *
+         */
+        protected function widgets_init(){
+            register_widget( 'EOD_Stock_Prices_Widget' );
+        }
+
+        /**
+         *
+         */
         protected function register_ajax_routes(){
             $ajaxRoutes = array(
               'eod_stock_prices_refresh'
@@ -75,9 +86,19 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
         public function enqueue_scripts() {
             global $post;
             if( has_shortcode( $post->post_content, 'eod_ticker')) {
-                wp_enqueue_script( 'eod_stock-prices-plugin', plugins_url( '/js/eod-stock-prices-plugin.js', __FILE__ ), array('jquery') );
+                wp_enqueue_script( 'eod_stock-prices-plugin', plugins_url( '/js/eod-stock-prices.js', __FILE__ ), array('jquery') );
 
-                wp_enqueue_style('eod_stock-prices-plugin',plugins_url('/css/eod-stock-prices-plugin.min.css',__FILE__));
+                wp_enqueue_style('eod_stock-prices-plugin',plugins_url('/css/eod-stock-prices.css',__FILE__));
+                $protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+
+                // Set the ajaxurl Parameter which will be accessible from javascript
+                $params = array(
+                    // Get the url to the admin-ajax.php file using admin_url()
+                    'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
+                );
+                // Print the script to our page
+                wp_localize_script( 'eod_stock-prices-plugin', 'eod_params', $params );
+
                 //Force not to cache page
                 //define( 'DONOTCACHEPAGE', true );
             }
@@ -87,9 +108,11 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
          *
          */
         public function ajax_eod_stock_prices_refresh(){
-           $tickerTarget = $_POST['target'];
+           $tickerTarget = $_GET['target'];
 
            $result = $this->call_eod_real_time_api($tickerTarget);
+           echo json_encode($result);
+           wp_die();
         }
 
 
@@ -107,7 +130,13 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
                 'target' => 'AAPL.US'
             ], $atts, $tag);
 
-            return '<span class="eod_ticker" role="eod_ticker" target="'.$shortcode_atts['target'].'"></span>';
+            $tickerData = $this->call_eod_real_time_api($shortcode_atts['target']);
+
+            $tickerData['evolution'] =  round($tickerData['open'] - $tickerData['close'],2);
+            $tickerData['evolutionClass'] = $tickerData['evolution'] > 0 ? 'plus' : ($tickerData['evolution'] == 0 ? 'equal' : 'minus');
+            $tickerData['evolutionSymbol'] = $tickerData['evolution'] > 0 ? '+' : '';
+
+            return '<span class="eod_ticker '.$tickerData['evolutionClass'].'" role="eod_ticker" target="'.$shortcode_atts['target'].'"><span role="name">'.$shortcode_atts['target'].'</span><span role="close">'.$tickerData['close'].'</span>(<span role="evolution">'.$tickerData['evolutionSymbol'].$tickerData['evolution'].'</span>)</span>';
         }
 
 
@@ -125,11 +154,17 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
                 $extraTargets = null;
             }
 
+            $plugin_options = get_option('eod_options');
+
+
             //Default token
-            $apiToken = 'OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX';
+            $apiKey = 'OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX';
+            if(array_key_exists('api_key', $plugin_options)){
+                $apiKey = $plugin_options['api_key'];
+            }
 
             //API Endpoint
-            $apiUrl = 'https://eodhistoricaldata.com/api/real-time/'.$target.'?api_token='.$apiToken.'&fmt=json';
+            $apiUrl = 'https://eodhistoricaldata.com/api/real-time/'.$target.'?api_token='.$apiKey.'&fmt=json';
             //Extra target management.
             if($extraTargets && count($extraTargets) > 0){
                 $apiUrl .= '&s=';
@@ -152,10 +187,11 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
 
             //Parse result and return
             try {
-                $result = json_decode($result);
+                $result = json_decode($result, true);
             } catch (Exception $err) {
                 error_log('Error getting api result : '.print_r($err,true));
             }
+
             return $result;
         }
     }
