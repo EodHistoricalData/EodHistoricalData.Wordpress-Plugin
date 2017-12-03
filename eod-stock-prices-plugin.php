@@ -14,6 +14,23 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
 {
     class EOD_Stock_Prices_Plugin
     {
+        /**
+         * Static load template method
+         * @param $templatePath
+         * @param $vars
+         * @return string
+         */
+        public static function loadTemplate($templatePath, $vars) {
+            //Load template
+            $template = dirname(__FILE__)."/".$templatePath;
+            ob_start();
+            extract($vars);
+            include $template;
+            $content = ob_get_contents();
+            ob_end_clean();
+
+            return $content;
+        }
 
         /**
          * Prepare plugin hooks / filters
@@ -24,9 +41,9 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             /* Runs on plugin deactivation*/
             register_deactivation_hook( __FILE__, array(&$this,'deactivate'));
 
-            add_action('init', array(&$this,'shortcodes_init'));
-            add_action( 'widgets_init', array(&$this,'widgets_init'));
-            add_action( 'wp_enqueue_scripts',  array(&$this,'enqueue_scripts'));
+            add_action('init', array(&$this, 'shortcodes_init'));
+            add_action( 'widgets_init', array(&$this, 'widgets_init'));
+            add_action( 'wp_enqueue_scripts',  array(EOD_Stock_Prices_Plugin::class, 'enqueue_scripts'));
 
             $this->register_ajax_routes();
             $this->admin = new EOD_Stock_Prices_Admin();
@@ -50,7 +67,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
         /**
          *
          */
-        protected function widgets_init(){
+        public function widgets_init(){
             register_widget( 'EOD_Stock_Prices_Widget' );
         }
 
@@ -83,9 +100,14 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
         /**
          * Shortcode JS Scripts to add for shortcode containing pages
          */
-        public function enqueue_scripts() {
+        public static function enqueue_scripts($widget_base_id = null) {
+            if($widget_base_id === null){
+                $widget_base_id = EOD_Stock_Prices_Widget::$widget_base_id;
+            }
             global $post;
-            if( has_shortcode( $post->post_content, 'eod_ticker')) {
+            if( has_shortcode( $post->post_content, 'eod_ticker')
+                || is_active_widget( false, false, $widget_base_id)
+            ) {
                 wp_enqueue_script( 'eod_stock-prices-plugin', plugins_url( '/js/eod-stock-prices.js', __FILE__ ), array('jquery') );
 
                 wp_enqueue_style('eod_stock-prices-plugin',plugins_url('/css/eod-stock-prices.css',__FILE__));
@@ -110,7 +132,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
         public function ajax_eod_stock_prices_refresh(){
            $tickerTarget = $_GET['target'];
 
-           $result = $this->call_eod_real_time_api($tickerTarget);
+           $result = self::get_real_time_ticker($tickerTarget);
            echo json_encode($result);
            wp_die();
         }
@@ -130,22 +152,41 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
                 'target' => 'AAPL.US'
             ], $atts, $tag);
 
-            $tickerData = $this->call_eod_real_time_api($shortcode_atts['target']);
+            $tickerData = self::get_real_time_ticker($shortcode_atts['target']);
+
+            return self::loadTemplate("template/ticker.php", array('tickerData' => $tickerData, 'target' => $shortcode_atts['target']));
+        }
+
+        /**
+         * get Ticker infos and calculate evolution
+         * @param $target
+         * @return mixed
+         */
+        public static function get_real_time_ticker($target){
+
+            $tickerData = self::call_eod_real_time_api($target);
+
+            if(!$tickerData){
+                return array('error' => 'no result from real time api');
+            }
+
+            if(array_key_exists('error', $tickerData)){
+                return $tickerData;
+            }
 
             $tickerData['evolution'] =  round($tickerData['open'] - $tickerData['close'],2);
             $tickerData['evolutionClass'] = $tickerData['evolution'] > 0 ? 'plus' : ($tickerData['evolution'] == 0 ? 'equal' : 'minus');
             $tickerData['evolutionSymbol'] = $tickerData['evolution'] > 0 ? '+' : '';
 
-            return '<span class="eod_ticker '.$tickerData['evolutionClass'].'" role="eod_ticker" target="'.$shortcode_atts['target'].'"><span role="name">'.$shortcode_atts['target'].'</span><span role="close">'.$tickerData['close'].'</span>(<span role="evolution">'.$tickerData['evolutionSymbol'].$tickerData['evolution'].'</span>)</span>';
+            return $tickerData;
         }
-
 
         /**
          * Will cal api asking for wanted ticker then returns the result
          * @param $targets
          * @return mixed
          */
-        public function call_eod_real_time_api ($targets) {
+        public static function call_eod_real_time_api ($targets) {
             if(is_array($targets)){
                 $target = $targets[0];
                 $extraTargets = array_slice($targets,1);
@@ -182,13 +223,29 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $result = curl_exec($ch);
+            curl_setopt($ch, CURLOPT_VERBOSE, true);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+
+            $response = curl_exec($ch);
+
+            //Parse response (headers vs body)
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            $headers = substr($response, 0, $header_size);
+            $body = substr($response, $header_size);
             curl_close($ch);
 
-            //Parse result and return
+            //Parse json body or return error
+            if(!$body || strlen(trim($body)) === 0){
+                return array('error' => 'null body', 'headers'  => $headers);
+            }
+            if($body === "Forbidden"){
+                return array('error' => 'Forbidden', 'headers'  => $headers);
+            }
+
             try {
-                $result = json_decode($result, true);
+                $result = json_decode($body, true);
             } catch (Exception $err) {
+                $result = array('error' => $err->getMessage(), 'body' => $body, 'headers'  => $headers);
                 error_log('Error getting api result : '.print_r($err,true));
             }
 

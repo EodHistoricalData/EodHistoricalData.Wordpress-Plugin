@@ -1,0 +1,4 @@
+<span class="eod_ticker <?php echo $tickerData['evolutionClass'] ?>" role="eod_ticker" target="<?php echo $target ?>">
+    <span role="name"><?php echo $target ?></span><span role="close"><?php echo $tickerData['close'] ?></span>
+    <span role="evolution">(<span role="value"><?php echo $tickerData['evolutionSymbol'].$tickerData['evolution'] ?></span>)</span>
+</span>

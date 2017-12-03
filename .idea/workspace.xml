@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="571eb4ef-02e9-4846-a6c9-d2540718a923" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/widget/eod-stock-prices-widget.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/template/ticker.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/widget/template/ticker_widget.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/widget/template/ticker_widget_form.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css" afterPath="$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css" />
+      <change beforePath="$PROJECT_DIR$/admin/eod-stock-prices-admin.php" afterPath="$PROJECT_DIR$/admin/eod-stock-prices-admin.php" />
+      <change beforePath="$PROJECT_DIR$/css/eod-stock-prices.css" afterPath="$PROJECT_DIR$/css/eod-stock-prices.css" />
       <change beforePath="$PROJECT_DIR$/eod-stock-prices-plugin.php" afterPath="$PROJECT_DIR$/eod-stock-prices-plugin.php" />
       <change beforePath="$PROJECT_DIR$/js/eod-stock-prices.js" afterPath="$PROJECT_DIR$/js/eod-stock-prices.js" />
+      <change beforePath="$PROJECT_DIR$/widget/eod-stock-prices-widget.php" afterPath="$PROJECT_DIR$/widget/eod-stock-prices-widget.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +25,28 @@
       <file leaf-file-name="eod-stock-prices-plugin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eod-stock-prices-plugin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+            <state relative-caret-position="211">
+              <caret line="197" column="40" lean-forward="false" selection-start-line="197" selection-start-column="30" selection-end-line="197" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ticker.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/ticker.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="123" lean-forward="false" selection-start-line="2" selection-start-column="123" selection-end-line="2" selection-end-column="123" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eod-stock-prices-admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/eod-stock-prices-admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-249">
+              <caret line="47" column="42" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -39,18 +65,18 @@
       <file leaf-file-name="eod-stock-prices-admin.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="30">
+              <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eod-stock-prices.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="eod-stock-prices.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/eod-stock-prices.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -59,18 +85,38 @@
       <file leaf-file-name="eod-stock-prices.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/eod-stock-prices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state relative-caret-position="165">
+              <caret line="11" column="60" lean-forward="false" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eod-stock-prices-widget.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="eod-stock-prices-widget.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/widget/eod-stock-prices-widget.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="3" lean-forward="true" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+            <state relative-caret-position="244">
+              <caret line="50" column="37" lean-forward="false" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ticker_widget.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/widget/template/ticker_widget.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ticker_widget_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/widget/template/ticker_widget_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -92,7 +138,21 @@
       <find>eod_stock_prices_refresh</find>
       <find>enqueue</find>
       <find>eod_ticker</find>
+      <find>template</find>
+      <find>wpb_widget_domain</find>
+      <find>init_wi</find>
+      <find>loadTemplate</find>
+      <find>call_eod</find>
+      <find>include</find>
+      <find>shortcode</find>
+      <find>get_real</find>
+      <find>admin_scripts</find>
+      <find>enque</find>
+      <find>Eod_Stock_prices_widget</find>
+      <find>enqueue_scri</find>
       <find>enqueue_scripts</find>
+      <find>call_eod_real_time_api</find>
+      <find>get_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,15 +167,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ehd-stock-prices-plugin.php" />
-        <option value="$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css" />
-        <option value="$PROJECT_DIR$/css/eod-stock-prices.css" />
         <option value="$PROJECT_DIR$/admin/template/configuration.php" />
         <option value="$PROJECT_DIR$/admin/template/options.php" />
-        <option value="$PROJECT_DIR$/admin/eod-stock-prices-admin.php" />
-        <option value="$PROJECT_DIR$/js/eod-stock-prices.js" />
         <option value="$PROJECT_DIR$/widget/widget.php" />
+        <option value="$PROJECT_DIR$/widget/template/ticker_widget.php" />
+        <option value="$PROJECT_DIR$/admin/eod-stock-prices-admin.php" />
         <option value="$PROJECT_DIR$/eod-stock-prices-plugin.php" />
+        <option value="$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css" />
+        <option value="$PROJECT_DIR$/widget/template/ticker_widget_form.php" />
         <option value="$PROJECT_DIR$/widget/eod-stock-prices-widget.php" />
+        <option value="$PROJECT_DIR$/template/ticker.php" />
+        <option value="$PROJECT_DIR$/js/eod-stock-prices.js" />
+        <option value="$PROJECT_DIR$/css/eod-stock-prices.css" />
       </list>
     </option>
   </component>
@@ -159,12 +222,39 @@
             <path>
               <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="widget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eod-stock-prices-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eod-stock-prices-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="widget" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -178,6 +268,9 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -307,12 +400,12 @@
       <workItem from="1511808484788" duration="2155000" />
       <workItem from="1511810705247" duration="608000" />
       <workItem from="1511903589689" duration="2380000" />
-      <workItem from="1512216302405" duration="4251000" />
+      <workItem from="1512216302405" duration="10968000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9394000" />
+    <option name="totallyTimeSpent" value="16111000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="722" extended-state="6" />
@@ -445,22 +538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/eod-stock-prices-admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="67" column="11" lean-forward="true" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/eod-stock-prices.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -471,35 +548,149 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/css/eod-stock-prices-admin.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/eod-stock-prices.js">
+    <entry file="file://$PROJECT_DIR$/admin/eod-stock-prices-admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state relative-caret-position="-249">
+          <caret line="47" column="42" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/ticker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="123" lean-forward="false" selection-start-line="2" selection-start-column="123" selection-end-line="2" selection-end-column="123" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/widget/template/ticker_widget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/widget/template/ticker_widget_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eod-stock-prices-plugin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        <state relative-caret-position="211">
+          <caret line="197" column="40" lean-forward="false" selection-start-line="197" selection-start-column="30" selection-end-line="197" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/widget/eod-stock-prices-widget.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="3" lean-forward="true" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+        <state relative-caret-position="244">
+          <caret line="50" column="37" lean-forward="false" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/eod-stock-prices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="60" lean-forward="false" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/eod-stock-prices.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>eod-stock-prices-plugin</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

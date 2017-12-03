@@ -55,7 +55,13 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          * Displays the configuration page
          */
         public function options_page(){
-            include(dirname(__FILE__).'/template/options.php');
+
+            $optionsPage = EOD_Stock_Prices_Plugin::loadTemplate(
+                'admin/template/options.php',
+                array('this' => $this)
+            );
+
+            echo $optionsPage;
         }
 
         /**

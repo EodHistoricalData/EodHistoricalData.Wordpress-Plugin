@@ -9,28 +9,32 @@
 if(!class_exists('EOD_Stock_Prices_Plugin')) {
     class EOD_Stock_Prices_Widget extends WP_Widget
     {
+        public static $widget_base_id = 'EOD_Stock_Prices_Widget';
 
         function __construct()
         {
             parent::__construct(
-                'EOD_Stock_Prices_Widget',
-                __('EOD Stock Prices', 'eod-stock-prices'),
-                array('description' => __('Sample widget based on WPBeginner Tutorial', 'eod-stock-prices'),)
+                self::$widget_base_id,
+                __('EOD Stock Prices Ticker', 'eod-stock-prices'),
+                array('description' => __('Stock Prices widget displays a ticker', 'eod-stock-prices'))
             );
+
+            EOD_Stock_Prices_Plugin::enqueue_scripts($this->id_base);
         }
 
         public function widget($args, $instance)
         {
             $title = apply_filters('widget_title', $instance['title']);
+            $target = $instance['target'];
 
-            // before and after widget arguments are defined by themes
-            echo $args['before_widget'];
-            if (!empty($title))
-                echo $args['before_title'] . $title . $args['after_title'];
+            $tickerData = EOD_Stock_Prices_Plugin::get_real_time_ticker($target);
 
-        // This is where you run the code and display the output
-            echo __('Hello, World!', 'eod-stock-prices');
-            echo $args['after_widget'];
+            $widgetContent = EOD_Stock_Prices_Plugin::loadTemplate(
+                    "widget/template/ticker_widget.php",
+                    array('target' => $target, 'title' => $title, '_this' => $this, 'tickerData' => $tickerData)
+            );
+            echo $widgetContent;
+
         }
 
         // Widget Backend
@@ -38,18 +42,24 @@ if(!class_exists('EOD_Stock_Prices_Plugin')) {
         {
             if (isset($instance['title'])) {
                 $title = $instance['title'];
-            } else {
-                $title = __('New title', 'wpb_widget_domain');
             }
+
+            if (isset($instance['target'])) {
+                $target = $instance['target'];
+            }
+
+            $eod_options = get_option('eod_options');
             // Widget admin form
-            ?>
-            <p>
-                <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-                <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>"
-                       name="<?php echo $this->get_field_name('title'); ?>" type="text"
-                       value="<?php echo esc_attr($title); ?>"/>
-            </p>
-            <?php
+            $widgetFormContent = EOD_Stock_Prices_Plugin::loadTemplate(
+                "widget/template/ticker_widget_form.php",
+                array('target' => $target,
+                    'title' => $title,
+                    '_this' => $this,
+                    'instance' => $instance,
+                    'eod_options' => $eod_options)
+            );
+
+            echo $widgetFormContent;
         }
 
         // Updating widget replacing old instances with new
@@ -57,6 +67,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin')) {
         {
             $instance = array();
             $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
+            $instance['target'] = (!empty($new_instance['target'])) ? strip_tags($new_instance['target']) : '';
             return $instance;
         }
     }

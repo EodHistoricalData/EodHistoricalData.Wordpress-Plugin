@@ -5,16 +5,13 @@ jQuery(document).ready(function($){
             var spanEl = $(this);
             getTickerInfo($(this).attr('target')).done(function(result){
                 var data = JSON.parse(result);
-                var evolution = Math.round((data.open - data.close)*100)/100;
-                var evolutionSymbol = evolution > 0 ? '+' : '';
-                var evolutionClass = evolution > 0 ? 'plus' : (evolution == 0 ? 'equal' : 'minus');
 
                 spanEl.removeClass('plus').removeClass('minus').removeClass('equal');
 
                 spanEl.find('[role="close"]').text(data.close);
-                spanEl.find('[role="evolution"]').text(evolutionSymbol+evolution);
+                spanEl.find('[role="evolution"] [role="value"]').text(data.evolutionSymbol+data.evolution);
 
-                spanEl.addClass(evolutionClass);
+                spanEl.addClass(data.evolutionClass);
             });
         });
     }
