@@ -68,7 +68,7 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          * Display the text of the section
          */
         public function eod_options_main_text(){
-            echo '<p>Find here all API parameters for Stock Prices plugin. Demo API Key is <span>OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX</span> (only works for AAPL.US).</p>';
+            echo '<p>'.__('Find here all API parameters for Stock Prices plugin. Demo API Key is <span>OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX</span> (only works for AAPL.US).','eod_stock_prices').'</p>';
         }
 
         /**
@@ -76,7 +76,7 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          */
         public function eod_option_api_key_render(){
             $options = get_option('eod_options');
-            echo "<input id='eod_option_api_key' name='eod_options[api_key]' size='40' type='text' value='{$options['api_key']}' placeholder='Your 32 characters API key' />";
+            echo "<input id='eod_option_api_key' name='eod_options[api_key]' size='40' type='text' value='{$options['api_key']}' placeholder='".__('Your 32 characters API key','eod_stock_prices')."' />";
         }
 
         /**
