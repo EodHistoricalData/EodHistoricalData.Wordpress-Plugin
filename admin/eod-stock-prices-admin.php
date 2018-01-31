@@ -15,7 +15,7 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
             if(is_admin()){
                 add_action( 'admin_menu', array(&$this,'admin_menu'));
                 add_action( 'admin_init', array(&$this,'admin_settings') );
-
+                add_action( 'admin_notices', array(&$this,'admin_settings_notices') );
             }
             add_action( 'admin_enqueue_scripts',  array(&$this,'admin_scripts'));
         }
@@ -50,6 +50,12 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
             add_settings_field('eod_option_api_key', 'Your API Key', array(&$this, 'eod_option_api_key_render'), 'eod_options_section', 'eod_options_main');
         }
 
+        /**
+         * Displays the errors defined with add_settings_error (when validating)
+         */
+        public function admin_settings_notices(){
+            settings_errors( 'eod_options' );
+        }
 
         /**
          * Displays the configuration page
@@ -88,6 +94,7 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
             $newinput['api_key'] = trim($input['api_key']);
             if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['api_key'])) {
                 $newinput['api_key'] = '';
+                add_settings_error('eod_options', 'invalid-api-key', 'The API Key entered is invalid, should be 32 char or numbers only.');
             }
             return $newinput;
         }

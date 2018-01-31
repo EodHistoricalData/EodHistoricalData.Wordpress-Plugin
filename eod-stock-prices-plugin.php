@@ -245,7 +245,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             try {
                 $result = json_decode($body, true);
             } catch (Exception $err) {
-                $result = array('error' => $err->getMessage(), 'body' => $body, 'headers'  => $headers);
+                $result = array('error' => $body, 'exception' => $err->getMessage(), 'headers'  => $headers);
                 error_log('Error getting api result : '.print_r($err,true));
             }
 

@@ -12,9 +12,11 @@
 
 }
 
+.eod_ticker.error,
 .eod_ticker.minus [role='evolution'] {
     color: #b92c28;
 }
+
 .eod_ticker.plus [role='evolution'] {
     color: #27a644;
 }
@@ -43,4 +45,8 @@
 .eod_ticker.equal [role='evolution']::after{
     content: '=';
     color: #357ebd;
+}
+
+ul.eod_widget_ticker_list li {
+    display: block;
 }

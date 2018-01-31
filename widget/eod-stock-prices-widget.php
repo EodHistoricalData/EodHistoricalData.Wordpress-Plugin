@@ -25,13 +25,18 @@ if(!class_exists('EOD_Stock_Prices_Plugin')) {
         public function widget($args, $instance)
         {
             $title = apply_filters('widget_title', $instance['title']);
-            $target = $instance['target'];
-
-            $tickerData = EOD_Stock_Prices_Plugin::get_real_time_ticker($target);
+            $target = json_decode($instance['target']);
+            $targetList = [];
+            foreach($target as $targetElement) {
+                $targetList[] = array(
+                    'target' => $targetElement,
+                    'tickerData' => EOD_Stock_Prices_Plugin::get_real_time_ticker($targetElement)
+                );
+            }
 
             $widgetContent = EOD_Stock_Prices_Plugin::loadTemplate(
                     "widget/template/ticker_widget.php",
-                    array('target' => $target, 'title' => $title, '_this' => $this, 'tickerData' => $tickerData)
+                    array('target' => $target, 'title' => $title, '_this' => $this, 'targetList' => $targetList, 'args' => $args)
             );
             echo $widgetContent;
 
