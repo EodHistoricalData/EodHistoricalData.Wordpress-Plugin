@@ -166,7 +166,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             $atts = array_change_key_case((array)$atts, CASE_LOWER);
             // override default attributes with user attributes
             $shortcode_atts = shortcode_atts([
-                'target' => 'AAPL.US'
+                'target' => 'SHORTCODE_NO_TARGET'
             ], $atts, $tag);
 
             $tickerData = self::get_real_time_ticker($shortcode_atts['target']);

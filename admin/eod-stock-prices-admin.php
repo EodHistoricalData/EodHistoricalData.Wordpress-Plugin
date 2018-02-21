@@ -24,8 +24,6 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          *
          */
         public function admin_scripts( $hook ){
-            echo "admin_scripts";
-            echo $hook;
             //bootstrap
             wp_enqueue_style('bootstrap_css',plugins_url('/../vendor/bootstrap/css/bootstrap.css',__FILE__));
             wp_enqueue_script( 'bootstrap_popper', plugins_url( '/../vendor/bootstrap/js/popper.min.js', __FILE__ ), array('jquery'), false,true);
