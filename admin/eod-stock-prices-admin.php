@@ -23,7 +23,9 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
         /**
          *
          */
-        public function admin_scripts(){
+        public function admin_scripts( $hook ){
+            echo "admin_scripts";
+            echo $hook;
             //bootstrap
             wp_enqueue_style('bootstrap_css',plugins_url('/../vendor/bootstrap/css/bootstrap.css',__FILE__));
             wp_enqueue_script( 'bootstrap_popper', plugins_url( '/../vendor/bootstrap/js/popper.min.js', __FILE__ ), array('jquery'), false,true);
@@ -31,7 +33,14 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
             wp_enqueue_style('glyphicons_css',plugins_url('/../vendor/bootstrap/css/glyphicons.css',__FILE__));
 
             //css
-            wp_enqueue_style('le_time_slots_admin_css',plugins_url('/css/eod-stock-prices-admin.css',__FILE__));
+            wp_enqueue_style('le_eod_stock_admin_css',plugins_url('/css/eod-stock-prices-admin.css',__FILE__));
+
+            //Only for widget.php page
+            if ( $hook == 'widgets.php' ) {
+                wp_enqueue_script( 'le_eod_stock_widget_js', plugins_url('/js/eod-widget-form.js', __FILE__), array('jquery'), '1.0', true);
+            }else{
+                echo $hook;
+            }
         }
 
         /**
@@ -82,7 +91,7 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          */
         public function eod_option_api_key_render(){
             $options = get_option('eod_options');
-            echo "<input id='eod_option_api_key' name='eod_options[api_key]' size='40' type='text' value='{$options['api_key']}' placeholder='".__('Your 32 characters API key','eod_stock_prices')."' />";
+            echo "<input id='eod_option_api_key' name='eod_options[api_key]' size='40' type='text' value='{$options['api_key']}' placeholder='".__('Your API key','eod_stock_prices')."' />";
         }
 
         /**
@@ -92,10 +101,10 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
          */
         function eod_options_validate($input) {
             $newinput['api_key'] = trim($input['api_key']);
-            if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['api_key'])) {
+            /*if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['api_key'])) {
                 $newinput['api_key'] = '';
                 add_settings_error('eod_options', 'invalid-api-key', 'The API Key entered is invalid, should be 32 char or numbers only.');
-            }
+            }*/
             return $newinput;
         }
     }

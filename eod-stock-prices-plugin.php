@@ -2,7 +2,7 @@
 /*
 Plugin Name: Stock Prices plugin
 Plugin URI: https://eodhistoricaldata.com/knowledgebase/plugins
-Description: The stock prices plugin allows you to use a wisget and a shortcode to display the ticker data you want.
+Description: The stock prices plugin allows you to use a widget and a shortcode to display the ticker data you want.
 Version: 1.0
 Author: Eod Historical Data
 Author URI: https://eodhistoricaldata.com
@@ -40,6 +40,10 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             register_activation_hook(__FILE__,array(&$this,'activate'));
             /* Runs on plugin deactivation*/
             register_deactivation_hook( __FILE__, array(&$this,'deactivate'));
+
+
+            $plugin = plugin_basename( __FILE__ );
+            add_filter( "plugin_action_links_$plugin", array(&$this, 'add_plugins_list_link') );
 
             add_action('init', array(&$this, 'shortcodes_init'));
             add_action( 'widgets_init', array(&$this, 'widgets_init'));
@@ -84,6 +88,19 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
                 add_action('wp_ajax_nopriv_'.$route, array(&$this,'ajax_'.$route));
             }
 
+        }
+
+        /**
+         * @param $links
+         * @return mixed
+         */
+        function add_plugins_list_link( $links ) {
+            $settings_link = '<a href="admin.php?page=eod-stock-prices-admin">' . __( 'Settings' ) . '</a>';
+            array_push( $links, $settings_link );
+
+            $plugin_page_link = '<a href="https://eodhistoricaldata.com/">' . __( 'EOD Historical Data' ) . '</a>';
+            array_push( $links, $plugin_page_link );
+            return $links;
         }
 
 
