@@ -1,8 +1,8 @@
-.eod_error .widget_error{
+.eod_error .widget_error {
     color: red;
 }
 
-.eod_ticker_list .remove_ticker_input{
+.eod_ticker_list .remove_ticker_input {
     display: inline-block;
     background-color: red;
     padding: 0px 5px 3px 5px;
@@ -16,7 +16,7 @@
 
 .eod_ticker_list .add_ticker_input {
     display: inline-block;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     padding: 3px 4px 3px 4px;
     color: white;
     border-radius: 10px;
@@ -25,6 +25,7 @@
     margin-top: -4px;
     line-height: 13px;
 }
+
 .eod_ticker_input {
     display: inline-block;
     width: 40%;

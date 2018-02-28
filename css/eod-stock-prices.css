@@ -1,4 +1,4 @@
-.eod_ticker{
+.eod_ticker {
     display: inline-block;
     font-size: 12px;
 }
@@ -9,7 +9,6 @@
 }
 
 .eod_ticker [role='value'] {
-
 }
 
 .eod_ticker.error,
@@ -20,11 +19,12 @@
 .eod_ticker.plus [role='evolution'] {
     color: #27a644;
 }
+
 .eod_ticker.equal [role='evolution'] {
     color: #357ebd;
 }
 
-.eod_ticker [role='evolution']::after{
+.eod_ticker [role='evolution']::after {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -32,17 +32,19 @@
     background-size: contain;
 }
 
-.eod_ticker.minus [role='evolution']::after{
+.eod_ticker.minus [role='evolution']::after {
     content: '\f140';
     font-family: dashicons;
     color: #b92c28;
 }
-.eod_ticker.plus [role='evolution']::after{
+
+.eod_ticker.plus [role='evolution']::after {
     content: '\f142';
     font-family: dashicons;
     color: #27a644;
 }
-.eod_ticker.equal [role='evolution']::after{
+
+.eod_ticker.equal [role='evolution']::after {
     content: '=';
     color: #357ebd;
 }
