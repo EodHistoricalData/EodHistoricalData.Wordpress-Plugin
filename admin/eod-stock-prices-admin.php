@@ -6,6 +6,7 @@
  * Time: 22:14
  */
 if(!class_exists('EOD_Stock_Prices_Admin')) {
+    
     class EOD_Stock_Prices_Admin {
         /**
          * Prepare plugin hooks / filters
@@ -36,8 +37,6 @@ if(!class_exists('EOD_Stock_Prices_Admin')) {
             //Only for widget.php page
             if ( $hook == 'widgets.php' ) {
                 wp_enqueue_script( 'le_eod_stock_widget_js', plugins_url('/js/eod-widget-form.js', __FILE__), array('jquery'), '1.0', true);
-            }else{
-                echo $hook;
             }
         }
 
