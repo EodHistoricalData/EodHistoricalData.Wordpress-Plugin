@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Stock Prices plugin
-Plugin URI: https://eodhistoricaldata.com/knowledgebase/plugins
+Plugin URI: https://eodhd.com/knowledgebase/plugins
 Description: The stock prices plugin allows you to use a widget and a shortcode to display the ticker data you want.
 Version: 1.0
 Author: Eod Historical Data
-Author URI: https://eodhistoricaldata.com
+Author URI: https://eodhd.com
 */
 require ('admin/eod-stock-prices-admin.php');
 require('widget/eod-stock-prices-widget.php');
@@ -98,7 +98,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             $settings_link = '<a href="admin.php?page=eod-stock-prices-admin">' . __( 'Settings' ) . '</a>';
             array_push( $links, $settings_link );
 
-            $plugin_page_link = '<a href="https://eodhistoricaldata.com/">' . __( 'EOD Historical Data' ) . '</a>';
+            $plugin_page_link = '<a href="https://eodhd.com/">' . __( 'EOD Historical Data' ) . '</a>';
             array_push( $links, $plugin_page_link );
             return $links;
         }
@@ -222,7 +222,7 @@ if(!class_exists('EOD_Stock_Prices_Plugin'))
             }
 
             //API Endpoint
-            $apiUrl = 'https://eodhistoricaldata.com/api/real-time/'.$target.'?api_token='.$apiKey.'&fmt=json';
+            $apiUrl = 'https://eodhd.com/api/real-time/'.$target.'?api_token='.$apiKey.'&fmt=json';
             //Extra target management.
             if($extraTargets && count($extraTargets) > 0){
                 $apiUrl .= '&s=';
